@@ -22,11 +22,6 @@ jobs:
       run: |
         pip3 install PyInstaller
         cd ${GITHUB_WORKSPACE} && python3 -m PyInstaller --onefile -w src/tcg-to-deckbox.py --add-data=src/replacements.config:.
-    - name: Upload Linux Executable
-      uses: actions/upload-artifact@v2
-      with:
-        name: tcg-to-deckbox
-        path: dist
 
   release-windows:
     runs-on: windows-latest
@@ -38,8 +33,3 @@ jobs:
       run: |
         pip3 install PyInstaller
         cd ${GITHUB_WORKSPACE} && python3 -m PyInstaller --onefile -w src/tcg-to-deckbox.py --add-data=src/replacements.config:.
-    - name: Upload Windows Executable
-      uses: actions/upload-artifact@v2
-      with:
-        name: tcg-to-deckbox
-        path: dist
