@@ -5,8 +5,7 @@ import os
 import os.path
 import configparser
 import re
-from tkinter import filedialog
-from tkinter import messagebox
+from tkinter import filedialog, messagebox
 import tkinter as tk
 import requests
 import urllib.parse
@@ -44,8 +43,9 @@ bab_mapping = {
 }
 
 # Get rid of the root TK window, we don't need it.
-root = tk.Tk()
-root.withdraw()
+if os.name == "nt" or (os.name == 'poxix' and "DIPSLAY" in os.environ["DISPLAY"]):
+    root = tk.Tk()
+    root.withdraw()
 
 # Queries scryfall to build a list of cards that have multiple names.
 def fetch_multiple_names(uri, page=1):
@@ -236,14 +236,14 @@ with open(FILE, newline="") as tcgcsvfile, open(
                 if deckbox_request_url == deckbox_response.url:
                     print(
                         "Dual name for '%s' found on deckbox, the dual name will be used for the import."
-                        % (scryfall_data[row["Name"]], scryfall_data[row["Name"]])
+                        % (scryfall_data[row["Name"]])
                     )
                 else:
                     print(
                         "Dual name not found for '%s' on deckbox, front face name '%s' will be used."
                         % (scryfall_data[row["Name"]], row["Name"])
                     )
-                    skip_scryfall_names = True
+                    # skip_scryfall_names = True
             if skip_scryfall_names == False:
                 row["Name"] = scryfall_data[row["Name"]]
         # Fix edition for Buy-A-Box Promos
