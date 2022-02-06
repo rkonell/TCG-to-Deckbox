@@ -20,4 +20,4 @@ jobs:
 
     - name: Build Linux Executable
       run: |
-      cd ${GITHUB_WORKSPACE} && python3 -m PyInstaller --onefile -w src/tcg-to-deckbox.py --add-data=src/replacements.config:.
+        cd ${GITHUB_WORKSPACE} && python3 -m PyInstaller --onefile -w src/tcg-to-deckbox.py --add-data=src/replacements.config:.
