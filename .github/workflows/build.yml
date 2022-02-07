@@ -21,7 +21,6 @@ jobs:
     - name: Build Linux Executable
       run: |
         pip3 install PyInstaller
-        echo "${GITHUB_WORKSPACE}"
         cd ${GITHUB_WORKSPACE} && python3 -m PyInstaller --onefile -w src/tcg-to-deckbox.py --add-data "src/replacements.config:."
     - name: Upload Linux Executable
       uses: actions/upload-artifact@v2
@@ -38,8 +37,7 @@ jobs:
     - name: Build Windows Executable
       run: |
         pip3 install PyInstaller
-        echo "${GITHUB_WORKSPACE}"
-        cd ${GITHUB_WORKSPACE} && python3 -m PyInstaller --onefile -w "${GITHUB_WORKSPACE}/src/tcg-to-deckbox.py" --add-data "${GITHUB_WORKSPACE}/src/replacements.config;."
+        cd $env:GITHUB_WORKSPACE && python3 -m PyInstaller --onefile -w src/tcg-to-deckbox.py" --add-data "src/replacements.config;."
     - name: Upload Windows Executable
       uses: actions/upload-artifact@v2
       with:
